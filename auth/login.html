@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>إنشاء حساب جديد | المرجعية التربوية</title>
+  <title>تسجيل الدخول | المرجعية التربوية</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -45,7 +45,11 @@
     .delay-100 { animation-delay: 100ms; }
     .delay-200 { animation-delay: 200ms; }
     .delay-300 { animation-delay: 300ms; }
+    .delay-400 { animation-delay: 400ms; }
 
+    .tab-btn.active { border-color: #006c51; color: #006c51; }
+    .tab-btn { border-color: transparent; color: #6b7280; transition: all 0.2s ease; border-bottom-width: 2px; }
+    
     .btn-primary { transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease; }
     .btn-primary:hover { background: #005a43; box-shadow: 0 6px 20px rgba(0,108,81,0.35); transform: translateY(-1px); }
     
@@ -61,7 +65,7 @@
   <div class="w-full lg:w-[55%] flex flex-col justify-center px-8 sm:px-16 lg:px-24 py-12 relative overflow-y-auto">
     
     <!-- Back button -->
-    <a href="index.html" class="absolute top-8 right-8 lg:right-12 flex items-center gap-2 text-primary hover:text-primary-dark transition-colors font-medium text-[14px] animate-fade-in-up">
+    <a href="../index.html" class="absolute top-8 right-8 lg:right-12 flex items-center gap-2 text-primary hover:text-primary-dark transition-colors font-medium text-[14px] animate-fade-in-up">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
       العودة للرئيسية
     </a>
@@ -69,24 +73,23 @@
     <div class="max-w-md w-full mx-auto mt-12">
       <!-- Title -->
       <div class="mb-10 animate-fade-in-up delay-100">
-        <h1 class="font-tajawal font-bold text-[36px] text-primary-dark mb-3">إنشاء حساب جديد ✨</h1>
-        <p class="font-readex font-normal text-[15px] text-[#6b7280]">انضم إلى المرجعية التربوية وابدأ رحلة التفوق الأكاديمي.</p>
+        <h1 class="font-tajawal font-bold text-[36px] text-primary-dark mb-3">مرحباً بك مجدداً 👋</h1>
+        <p class="font-readex font-normal text-[15px] text-[#6b7280]">قم بتسجيل الدخول للمتابعة من حيث توقفت في المرجعية التربوية.</p>
+      </div>
+
+      <!-- Tabs (Student / Admin) -->
+      <div class="flex items-center justify-center border-b border-border mb-8 animate-fade-in-up delay-200">
+        <button id="tab-student" class="tab-btn active flex-1 font-readex font-bold text-[16px] py-3 text-center" onclick="switchTab('student')" type="button">
+          دخول كطالب
+        </button>
+        <button id="tab-admin" class="tab-btn flex-1 font-readex font-bold text-[16px] py-3 text-center" onclick="switchTab('admin')" type="button">
+          دخول كمسؤول
+        </button>
       </div>
 
       <!-- Form -->
-      <form action="index.html" class="flex flex-col gap-5 animate-fade-in-up delay-200">
+      <form action="../index.html" class="flex flex-col gap-5 animate-fade-in-up delay-300">
         
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          <div class="flex flex-col gap-2">
-            <label for="fname" class="font-readex font-medium text-[14px] text-primary-dark">الاسم الأول</label>
-            <input type="text" id="fname" placeholder="محمد" class="input-field w-full border border-border rounded-xl px-4 py-3.5 font-readex font-normal text-[15px] text-primary-dark focus:outline-none focus:border-primary" required />
-          </div>
-          <div class="flex flex-col gap-2">
-            <label for="lname" class="font-readex font-medium text-[14px] text-primary-dark">الاسم الأخير</label>
-            <input type="text" id="lname" placeholder="أحمد" class="input-field w-full border border-border rounded-xl px-4 py-3.5 font-readex font-normal text-[15px] text-primary-dark focus:outline-none focus:border-primary" required />
-          </div>
-        </div>
-
         <div class="flex flex-col gap-2">
           <label for="email" class="font-readex font-medium text-[14px] text-primary-dark">البريد الإلكتروني</label>
           <input type="email" id="email" placeholder="example@email.com" class="input-field w-full border border-border rounded-xl px-4 py-3.5 font-readex font-normal text-[15px] text-primary-dark focus:outline-none focus:border-primary text-right" dir="ltr" required />
@@ -97,23 +100,24 @@
           <input type="password" id="password" placeholder="••••••••" class="input-field w-full border border-border rounded-xl px-4 py-3.5 font-readex font-normal text-[15px] text-primary-dark focus:outline-none focus:border-primary text-right" dir="ltr" required />
         </div>
 
-        <div class="flex items-start gap-3 mt-2 group">
-          <input type="checkbox" id="terms" class="mt-1 w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2 cursor-pointer shrink-0" required />
-          <label for="terms" class="font-readex font-normal text-[13px] text-[#6b7280] leading-relaxed cursor-pointer group-hover:text-primary-dark transition-colors">
-            أوافق على <a href="#" class="text-primary hover:underline font-medium">شروط الخدمة</a> و <a href="#" class="text-primary hover:underline font-medium">سياسة الخصوصية</a> الخاصة بالمنصة.
+        <div class="flex items-center justify-between mt-1">
+          <label class="flex items-center gap-2 cursor-pointer group">
+            <input type="checkbox" class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary focus:ring-2 cursor-pointer" />
+            <span class="font-readex font-normal text-[14px] text-[#414845] group-hover:text-primary transition-colors">تذكرني</span>
           </label>
+          <a href="#" class="font-readex font-medium text-[14px] text-primary hover:underline">نسيت كلمة المرور؟</a>
         </div>
 
-        <button type="submit" class="w-full bg-primary font-readex font-bold text-[16px] text-white py-4 rounded-xl shadow-[0_8px_20px_rgba(0,108,81,0.25)] hover:shadow-[0_10px_25px_rgba(0,108,81,0.35)] transition-all btn-primary mt-4">
-          إنشاء الحساب
+        <button type="submit" id="submit-btn" class="w-full bg-primary font-readex font-bold text-[16px] text-white py-4 rounded-xl shadow-[0_8px_20px_rgba(0,108,81,0.25)] hover:shadow-[0_10px_25px_rgba(0,108,81,0.35)] transition-all btn-primary mt-4">
+          تسجيل الدخول
         </button>
       </form>
 
-      <!-- Login Link -->
-      <div class="mt-8 text-center animate-fade-in-up delay-300">
+      <!-- Register Link -->
+      <div class="mt-8 text-center animate-fade-in-up delay-400">
         <p class="font-readex font-normal text-[15px] text-[#6b7280]">
-          لديك حساب بالفعل؟ 
-          <a href="login.html" class="font-bold text-primary hover:underline">سجّل دخولك الآن</a>
+          ليس لديك حساب؟ 
+          <a href="register.html" class="font-bold text-primary hover:underline">سجّل الآن كطالب</a>
         </p>
       </div>
     </div>
@@ -122,7 +126,7 @@
   <!-- Left Side (Image Cover) -->
   <div class="hidden lg:flex lg:w-[45%] relative overflow-hidden bg-primary-darkest">
     <div class="absolute inset-0">
-      <img src="https://www.figma.com/api/mcp/asset/212d35a7-eb99-4616-bde7-42bfcdb64672" alt="Background" class="w-full h-full object-cover opacity-50 mix-blend-overlay" />
+      <img src="https://www.figma.com/api/mcp/asset/d7fedc46-2b33-4885-a3e4-39cc3cf9d5f1" alt="Background" class="w-full h-full object-cover opacity-50 mix-blend-overlay" />
       <div class="absolute inset-0 bg-gradient-to-t from-primary-darkest via-[rgba(7,29,23,0.7)] to-transparent"></div>
     </div>
     
@@ -131,14 +135,27 @@
         <img src="https://www.figma.com/api/mcp/asset/73f79792-f273-490b-9fad-4ebdf0d9d4dc" alt="Logo" class="w-full h-full object-contain drop-shadow-md" />
       </div>
       <h2 class="font-tajawal font-bold text-[40px] leading-tight mb-4 animate-fade-in-up">
-        انضم لآلاف الطلاب<br />المتفوقين اليوم.
+        المرجعية التربوية<br />بوابتك للتفوق.
       </h2>
       <p class="font-readex font-light text-[18px] text-white/80 leading-relaxed max-w-md animate-fade-in-up delay-100">
-        خطوتك الأولى نحو التميز تبدأ من هنا. احصل على أفضل الشروحات والاختبارات التفاعلية.
+        نقدم لك أفضل الموارد التعليمية المعتمدة لنساعدك في تحقيق أهدافك الدراسية بأعلى جودة.
       </p>
     </div>
   </div>
 
+  <script>
+    function switchTab(tab) {
+      document.getElementById('tab-student').classList.remove('active');
+      document.getElementById('tab-admin').classList.remove('active');
+      document.getElementById('tab-' + tab).classList.add('active');
+      
+      if (tab === 'admin') {
+        document.getElementById('submit-btn').textContent = 'دخول كمسؤول';
+      } else {
+        document.getElementById('submit-btn').textContent = 'تسجيل الدخول';
+      }
+    }
+  </script>
 
   <!-- Page Transition Script -->
   <style>
