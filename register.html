@@ -137,5 +137,55 @@
     </div>
   </div>
 
+
+  <!-- Page Transition Script -->
+  <style>
+    body {
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+    body.page-loaded {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    body.page-fade-out {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Fade in on load
+      setTimeout(() => {
+        document.body.classList.add('page-loaded');
+      }, 50);
+
+      // Add click listener for smooth page transition
+      const transitionLinks = document.querySelectorAll('.page-transition-link');
+      transitionLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          const href = link.getAttribute('href');
+          const isHome = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/');
+          
+          if (href === 'index.html' && isHome) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            return;
+          }
+
+          if (href && href !== '#' && !href.startsWith('#')) {
+            e.preventDefault();
+            document.body.classList.remove('page-loaded');
+            document.body.classList.add('page-fade-out');
+            setTimeout(() => {
+              window.location.href = href;
+            }, 400);
+          }
+        });
+      });
+    });
+  </script>
+
 </body>
 </html>

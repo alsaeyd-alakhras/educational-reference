@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>المرجعية التربوية</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&family=Readex+Pro:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            tajawal: ['Tajawal', 'sans-serif'],
+            readex: ['Readex Pro', 'sans-serif'],
+          },
+          colors: {
+            primary: '#006c51',
+            'primary-dark': '#00241a',
+            'primary-darker': '#0d3b2e',
+            'primary-darkest': '#071d17',
+            gold: '#c8a84e',
+            mint: '#63f8c7',
+            'mint-light': '#66fbca',
+            cream: '#fafaf6',
+            border: '#e2e8e6',
+          },
+          maxWidth: { site: '1440px' },
+        }
+      }
+    }
+  </script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Readex Pro', sans-serif;
+      background: #fafaf6;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    .font-tajawal {
+      font-family: 'Tajawal', sans-serif;
+    }
+
+    /* Scrollbar for library section */
+    .lib-scroll::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .lib-scroll::-webkit-scrollbar-track {
+      background: #e2e8e6;
+      border-radius: 99px;
+    }
+
+    .lib-scroll::-webkit-scrollbar-thumb {
+      background: #006c51;
+      border-radius: 99px;
+    }
+
+    /* Mobile menu animation */
+    #mobile-menu {
+      transition: max-height 0.3s ease, opacity 0.3s ease;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+    }
+
+    #mobile-menu.open {
+      max-height: 400px;
+      opacity: 1;
+    }
+
+    /* Hover effects */
+    .nav-link {
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      right: 0;
+      width: 0;
+      height: 2px;
+      background: #006c51;
+      transition: width 0.25s ease;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    .course-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+    }
+
+    .course-card {
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .lib-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .lib-item {
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .blog-card img {
+      transition: transform 0.3s ease;
+    }
+
+    .blog-card:hover img {
+      transform: scale(1.03);
+    }
+
+    .btn-primary {
+      transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+    }
+
+    .btn-primary:hover {
+      background: #005a43;
+      box-shadow: 0 6px 20px rgba(0, 108, 81, 0.35);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .btn-outline:hover {
+      background: #006c51;
+      color: #fff;
+    }
+
+    .stage-card:hover {
+      border-color: #006c51;
+      background: #fff;
+      transform: translateY(-4px);
+    }
+
+    .stage-card {
+      transition: border-color 0.2s, background 0.2s, transform 0.25s ease;
+    }
+
+    .lib-tab.active {
+      background: #006c51;
+      color: #fff;
+      border-color: #006c51;
+    }
+
+    .lib-tab {
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .feature-card {
+      transition: border-color 0.2s;
+    }
+
+    .feature-card:hover {
+      border-color: rgba(0, 108, 81, 0.5);
+    }
+
+    /* Backdrop blur */
+    .floating-card {
+      backdrop-filter: blur(8px);
+    }
+
+    @media (max-width: 1024px) {
+      .bento-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .bento-item:nth-child(even) {
+        margin-top: 32px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .bento-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .bento-item:nth-child(even) {
+        margin-top: 0;
+      }
+    }
+  </style>
+</head>
+<body class="text-primary-dark font-readex bg-cream">
+<header class="bg-white border-b border-border sticky top-0 z-50">
+    <div class="max-w-site mx-auto px-6">
+      <div class="flex items-center justify-between py-4 gap-4">
+
+        <!-- Brand Logo (right in RTL = first child) -->
+        <a href="index.html" class="flex items-center gap-3 shrink-0 group transition-all duration-300 hover:-translate-y-1 page-transition-link">
+          <div class="flex flex-col items-end">
+            <span class="font-tajawal font-bold text-[28px] leading-tight text-primary-dark group-hover:text-primary transition-colors duration-300">المرجعية التربوية</span>
+          </div>
+          <div class="w-12 h-12 rounded-full overflow-hidden shrink-0 group-hover:shadow-lg group-hover:scale-110 transition-all duration-300">
+            <img src="https://www.figma.com/api/mcp/asset/73f79792-f273-490b-9fad-4ebdf0d9d4dc" alt="المرجعية التربوية"
+              class="w-full h-full object-cover" />
+          </div>
+        </a>
+
+        <!-- Navigation Links (center) -->
+        <nav class="hidden lg:flex items-center gap-8">
+          <a href="index.html" class="nav-link font-readex font-medium text-[14px] text-[#414845] hover:text-primary pb-1.5 page-transition-link transform hover:scale-105 transition-all duration-300">الرئيسية</a>
+          <a href="index.html#courses"
+            class="nav-link font-readex font-medium text-[14px] text-[#414845] hover:text-primary pb-1.5">الدورات</a>
+          <a href="index.html#about"
+            class="nav-link font-readex font-medium text-[14px] text-[#414845] hover:text-primary pb-1.5">عن المنصة</a>
+          <a href="index.html#library"
+            class="nav-link font-readex font-medium text-[14px] text-[#414845] hover:text-primary pb-1.5">المكتبة</a>
+          <a href="#blog"
+            class="nav-link font-readex font-medium text-[14px] text-[#414845] hover:text-primary pb-1.5">المدونة</a>
+        </nav>
+
+        <!-- Trailing Actions (left in RTL = last child) -->
+        <div class="hidden lg:flex items-center gap-4">
+          <button class="p-2 rounded-full hover:bg-gray-100 transition-colors">
+            <img src="https://www.figma.com/api/mcp/asset/44c28836-41bd-4395-8b68-01076024d11f" alt="اللغة"
+              class="w-5 h-5 object-contain" />
+          </button>
+          <a href="login.html"
+            class="border-2 border-[rgba(0,108,81,0.6)] font-readex font-semibold text-[14px] text-primary px-4 py-2 rounded-full btn-outline">
+            تسجيل دخول
+          </a>
+          <a href="register.html"
+            class="bg-primary font-readex font-bold text-[14px] text-white px-6 py-2 rounded-full btn-primary">
+            تسجيل
+          </a>
+        </div>
+
+        <!-- Mobile hamburger -->
+        <button id="hamburger" class="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+          aria-label="القائمة">
+          <svg id="icon-open" class="w-6 h-6 text-primary-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg id="icon-close" class="w-6 h-6 text-primary-dark hidden" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu">
+        <div class="pb-4 flex flex-col gap-3 border-t border-border pt-4">
+          <a href="index.html" class="font-readex font-medium text-[14px] text-[#414845] py-2 border-b border-border/50 page-transition-link">الرئيسية</a>
+          <a href="index.html#courses"
+            class="font-readex font-medium text-[14px] text-[#414845] py-2 border-b border-border/50">الدورات</a>
+          <a href="index.html#about" class="font-readex font-medium text-[14px] text-[#414845] py-2 border-b border-border/50">عن المنصة</a>
+          <a href="index.html#library"
+            class="font-readex font-medium text-[14px] text-[#414845] py-2 border-b border-border/50">المكتبة</a>
+          <a href="#blog"
+            class="font-readex font-medium text-[14px] text-[#414845] py-2">المدونة</a>
+          <div class="flex gap-3 mt-2">
+            <a href="login.html"
+              class="flex-1 text-center border-2 border-[rgba(0,108,81,0.6)] font-readex font-semibold text-[14px] text-primary px-4 py-2 rounded-full">تسجيل
+              دخول</a>
+            <a href="register.html"
+              class="flex-1 text-center bg-primary font-readex font-bold text-[14px] text-white px-6 py-2 rounded-full">تسجيل</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="bg-primary-dark pt-32 pb-16 relative overflow-hidden">
+    <div class="absolute inset-0">
+      <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80" class="w-full h-full object-cover opacity-20 mix-blend-overlay" alt="المرحلة الثانوية">
+      <div class="absolute inset-0 bg-gradient-to-t from-primary-dark to-transparent"></div>
+    </div>
+    <div class="container mx-auto px-6 sm:px-8 lg:px-12 relative z-10 text-center">
+      <div class="w-20 h-20 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl">
+        <img src="https://www.figma.com/api/mcp/asset/076cb13f-bb8d-4c97-9ff5-ca40ae520335" alt="ثانوية" class="w-10 h-10 object-contain invert brightness-0" style="filter: brightness(0) invert(1);" />
+      </div>
+      <h1 class="font-tajawal font-bold text-[40px] md:text-[48px] text-white mb-4">المرحلة الثانوية (التوجيهي)</h1>
+      <p class="font-readex font-light text-[16px] md:text-[18px] text-white/80 max-w-2xl mx-auto">
+        مسارك نحو التفوق في أهم مرحلة دراسية. تصفح جميع المواد الدراسية، الاختبارات السابقة، والمراجعات النهائية المخصصة لفرعك الدراسي.
+      </p>
+    </div>
+  </section>
+
+  <!-- BRANCHES (الفروع) -->
+  <section class="py-12 bg-white border-b border-border">
+    <div class="container mx-auto px-6 sm:px-8 lg:px-12 text-center">
+      <h2 class="font-tajawal font-bold text-[28px] text-primary-dark mb-8">اختر الفرع الدراسي</h2>
+      
+      <div class="flex flex-wrap justify-center gap-4">
+        <button class="bg-primary text-white border-2 border-primary rounded-xl px-8 py-4 flex flex-col items-center gap-2 hover:shadow-lg transition-all min-w-[140px]">
+          <span class="font-tajawal font-bold text-[20px]">العلمي</span>
+        </button>
+        <button class="bg-cream text-primary-dark border-2 border-border rounded-xl px-8 py-4 flex flex-col items-center gap-2 hover:border-primary hover:text-primary transition-all min-w-[140px]">
+          <span class="font-tajawal font-bold text-[20px]">الأدبي</span>
+        </button>
+        <button class="bg-cream text-primary-dark border-2 border-border rounded-xl px-8 py-4 flex flex-col items-center gap-2 hover:border-primary hover:text-primary transition-all min-w-[140px]">
+          <span class="font-tajawal font-bold text-[20px]">التجاري</span>
+        </button>
+        <button class="bg-cream text-primary-dark border-2 border-border rounded-xl px-8 py-4 flex flex-col items-center gap-2 hover:border-primary hover:text-primary transition-all min-w-[140px]">
+          <span class="font-tajawal font-bold text-[20px]">الصناعي</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUBJECTS GRID (المواد) -->
+  <section class="py-16 bg-cream">
+    <div class="container mx-auto px-6 sm:px-8 lg:px-12">
+      <div class="flex items-center justify-between mb-10">
+        <h2 class="font-tajawal font-bold text-[28px] text-primary-dark">المواد الدراسية (الفرع العلمي)</h2>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        
+        <!-- Subject 1 -->
+        <a href="courses.html" class="bg-white rounded-2xl p-6 border border-border shadow-sm hover:shadow-xl hover:border-primary transition-all group flex flex-col items-center text-center">
+          <div class="w-16 h-16 rounded-full bg-[rgba(0,108,81,0.1)] flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
+            <span class="text-primary group-hover:text-white font-tajawal font-bold text-[24px]">∑</span>
+          </div>
+          <h3 class="font-tajawal font-bold text-[20px] text-primary-dark mb-2">الرياضيات</h3>
+          <span class="font-readex text-[13px] text-[#6b7280]">15 دورة • 120 درس</span>
+        </a>
+
+        <!-- Subject 2 -->
+        <a href="courses.html" class="bg-white rounded-2xl p-6 border border-border shadow-sm hover:shadow-xl hover:border-primary transition-all group flex flex-col items-center text-center">
+          <div class="w-16 h-16 rounded-full bg-[rgba(0,108,81,0.1)] flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
+            <span class="text-primary group-hover:text-white font-tajawal font-bold text-[24px]">⚛</span>
+          </div>
+          <h3 class="font-tajawal font-bold text-[20px] text-primary-dark mb-2">الفيزياء</h3>
+          <span class="font-readex text-[13px] text-[#6b7280]">8 دورات • 85 درس</span>
+        </a>
+
+        <!-- Subject 3 -->
+        <a href="courses.html" class="bg-white rounded-2xl p-6 border border-border shadow-sm hover:shadow-xl hover:border-primary transition-all group flex flex-col items-center text-center">
+          <div class="w-16 h-16 rounded-full bg-[rgba(0,108,81,0.1)] flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
+            <span class="text-primary group-hover:text-white font-tajawal font-bold text-[24px]">🧬</span>
+          </div>
+          <h3 class="font-tajawal font-bold text-[20px] text-primary-dark mb-2">الأحياء</h3>
+          <span class="font-readex text-[13px] text-[#6b7280]">5 دورات • 60 درس</span>
+        </a>
+
+        <!-- Subject 4 -->
+        <a href="courses.html" class="bg-white rounded-2xl p-6 border border-border shadow-sm hover:shadow-xl hover:border-primary transition-all group flex flex-col items-center text-center">
+          <div class="w-16 h-16 rounded-full bg-[rgba(0,108,81,0.1)] flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
+            <span class="text-primary group-hover:text-white font-tajawal font-bold text-[24px]">🧪</span>
+          </div>
+          <h3 class="font-tajawal font-bold text-[20px] text-primary-dark mb-2">الكيمياء</h3>
+          <span class="font-readex text-[13px] text-[#6b7280]">6 دورات • 70 درس</span>
+        </a>
+
+        <!-- Subject 5 -->
+        <a href="courses.html" class="bg-white rounded-2xl p-6 border border-border shadow-sm hover:shadow-xl hover:border-primary transition-all group flex flex-col items-center text-center">
+          <div class="w-16 h-16 rounded-full bg-[rgba(0,108,81,0.1)] flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
+            <span class="text-primary group-hover:text-white font-tajawal font-bold text-[24px]">ض</span>
+          </div>
+          <h3 class="font-tajawal font-bold text-[20px] text-primary-dark mb-2">اللغة العربية</h3>
+          <span class="font-readex text-[13px] text-[#6b7280]">4 دورات • 50 درس</span>
+        </a>
+
+        <!-- Subject 6 -->
+        <a href="courses.html" class="bg-white rounded-2xl p-6 border border-border shadow-sm hover:shadow-xl hover:border-primary transition-all group flex flex-col items-center text-center">
+          <div class="w-16 h-16 rounded-full bg-[rgba(0,108,81,0.1)] flex items-center justify-center mb-4 group-hover:bg-primary transition-colors">
+            <span class="text-primary group-hover:text-white font-tajawal font-bold text-[24px]">E</span>
+          </div>
+          <h3 class="font-tajawal font-bold text-[20px] text-primary-dark mb-2">اللغة الإنجليزية</h3>
+          <span class="font-readex text-[13px] text-[#6b7280]">7 دورات • 90 درس</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- RESOURCES (أسئلة واختبارات) -->
+  <section class="py-16 bg-white border-t border-border">
+    <div class="container mx-auto px-6 sm:px-8 lg:px-12">
+      <div class="bg-primary-dark rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
+        <div class="absolute inset-0 bg-primary opacity-20" style="background-image: radial-gradient(circle at 10% 20%, rgba(0, 108, 81, 1) 0%, transparent 40%);"></div>
+        
+        <div class="relative z-10 text-right w-full md:w-2/3">
+          <h2 class="font-tajawal font-bold text-[32px] text-white mb-4">بنك الأسئلة والاختبارات السابقة</h2>
+          <p class="font-readex font-light text-[16px] text-white/80 max-w-xl">
+            اختبر جاهزيتك للامتحانات النهائية من خلال مكتبة ضخمة تضم أسئلة الوزارة للسنوات السابقة، نماذج تجريبية، ومكثفات مراجعة شاملة.
+          </p>
+        </div>
+        
+        <div class="relative z-10 shrink-0 w-full md:w-auto">
+          <a href="index.html#library" class="block w-full text-center bg-white text-primary-dark font-readex font-bold text-[16px] px-8 py-4 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all">
+            تصفح بنك الأسئلة
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<footer class="bg-primary-darkest text-white">
+    <div class="max-w-site mx-auto px-6 py-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+
+        <!-- Brand column -->
+        <div class="flex flex-col gap-5 items-start text-right lg:col-span-1">
+          <div class="flex items-center gap-3">
+            <div class="flex flex-col items-start">
+              <span class="font-tajawal font-bold text-[22px] text-white">المرجعية التربوية</span>
+            </div>
+            <div class="w-10 h-10 rounded-full overflow-hidden shrink-0">
+              <img src="https://www.figma.com/api/mcp/asset/73f79792-f273-490b-9fad-4ebdf0d9d4dc"
+                alt="المرجعية التربوية" class="w-full h-full object-cover" />
+            </div>
+          </div>
+          <p class="font-readex font-normal text-[14px] text-[#79a694] leading-[1.75]">
+            المنصة الوطنية الفلسطينية الأولى لدعم المسيرة التعليمية من الروضة حتى الجامعة.
+          </p>
+          <div class="flex items-center gap-3">
+            <a href="#" aria-label="تيليغرام"
+              class="w-9 h-9 rounded-full bg-[rgba(255,255,255,0.08)] flex items-center justify-center hover:bg-primary transition-colors">
+              <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24">
+                <path
+                  d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+              </svg>
+            </a>
+            <a href="#" aria-label="واتساب"
+              class="w-9 h-9 rounded-full bg-[rgba(255,255,255,0.08)] flex items-center justify-center hover:bg-primary transition-colors">
+              <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+              </svg>
+            </a>
+            <a href="#" aria-label="يوتيوب"
+              class="w-9 h-9 rounded-full bg-[rgba(255,255,255,0.08)] flex items-center justify-center hover:bg-primary transition-colors">
+              <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24">
+                <path
+                  d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="flex flex-col gap-5 items-start text-right">
+          <h4 class="font-readex font-bold text-[18px] text-white border-b border-[rgba(245,230,184,0.2)] pb-3 w-full">
+            روابط سريعة</h4>
+          <ul class="flex flex-col gap-3">
+            <li><a href="#"
+                class="font-readex font-normal text-[14px] text-[#79a694] hover:text-mint transition-colors">الرئيسية</a>
+            </li>
+            <li><a href="#courses"
+                class="font-readex font-normal text-[14px] text-[#79a694] hover:text-mint transition-colors">الدورات</a>
+            </li>
+            <li><a href="#library"
+                class="font-readex font-normal text-[14px] text-[#79a694] hover:text-mint transition-colors">المكتبة</a>
+            </li>
+            <li><a href="#blog"
+                class="font-readex font-normal text-[14px] text-[#79a694] hover:text-mint transition-colors">المدونة</a>
+            </li>
+            <li><a href="#about"
+                class="font-readex font-normal text-[14px] text-[#79a694] hover:text-mint transition-colors">عن
+                المنصة</a></li>
+          </ul>
+        </div>
+
+        <!-- Stages -->
+        <div class="flex flex-col gap-5 items-start text-right">
+          <h4 class="font-readex font-bold text-[18px] text-white border-b border-[rgba(245,230,184,0.2)] pb-3 w-full">
+            المراحل التعليمية</h4>
+          <ul class="flex flex-col gap-3">
+            <li><a href="#"
+                class="font-readex font-normal text-[14px] text-[#79a694] hover:text-mint transition-colors">الروضة</a>
+            </li>
+            <li><a href="#"
+                class="font-readex font-normal text-[14px] text-[#79a694] hover:text-mint transition-colors">ابتدائية</a>
+            </li>
+            <li><a href="#"
+                class="font-readex font-normal text-[14px] text-[#79a694] hover:text-mint transition-colors">إعدادية</a>
+            </li>
+            <li><a href="#"
+                class="font-readex font-normal text-[14px] text-[#79a694] hover:text-mint transition-colors">ثانوية /
+                توجيهي</a></li>
+            <li><a href="#"
+                class="font-readex font-normal text-[14px] text-[#79a694] hover:text-mint transition-colors">جامعة</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="flex flex-col gap-5 items-start text-right">
+          <h4 class="font-readex font-bold text-[18px] text-white border-b border-[rgba(245,230,184,0.2)] pb-3 w-full">
+            النشرة البريدية</h4>
+          <p class="font-readex font-normal text-[14px] text-[#79a694] leading-[1.75]">
+            اشترك لتصلك آخر الدورات والمقالات التعليمية على بريدك مباشرة.
+          </p>
+          <form class="flex flex-col gap-3 w-full" onsubmit="handleNewsletter(event)">
+            <input type="email" placeholder="بريدك الإلكتروني"
+              class="w-full bg-[rgba(255,255,255,0.07)] border border-[rgba(255,255,255,0.15)] rounded-xl px-4 py-3 font-readex font-normal text-[14px] text-white placeholder-[#79a694] focus:outline-none focus:border-mint transition-colors text-right"
+              dir="ltr" />
+            <button type="submit"
+              class="w-full bg-primary font-readex font-bold text-[14px] text-white py-3 rounded-xl hover:bg-[#005a43] transition-colors">
+              اشترك الآن
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Footer bottom bar -->
+    <div class="border-t border-[rgba(255,255,255,0.08)]">
+      <div class="max-w-site mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div class="flex items-center gap-4">
+          <a href="#"
+            class="font-readex font-normal text-[12px] text-[#79a694] hover:text-white transition-colors">الشروط
+            والأحكام</a>
+          <a href="#"
+            class="font-readex font-normal text-[12px] text-[#79a694] hover:text-white transition-colors">سياسة
+            الخصوصية</a>
+        </div>
+        <p class="font-readex font-normal text-[12px] text-[#79a694]">
+          © 2024 المرجعية التربوية. جميع الحقوق محفوظة.
+        </p>
+      </div>
+    </div>
+  </footer>
+<script>
+    // ── Mobile Menu ──────────────────────────────
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const iconOpen = document.getElementById('icon-open');
+    const iconClose = document.getElementById('icon-close');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.contains('open');
+      mobileMenu.classList.toggle('open');
+      iconOpen.classList.toggle('hidden');
+      iconClose.classList.toggle('hidden');
+    });
+
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+      if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+        mobileMenu.classList.remove('open');
+        iconOpen.classList.remove('hidden');
+        iconClose.classList.add('hidden');
+      }
+    });
+
+    // ── Library Tabs ─────────────────────────────
+    const libTabs = document.querySelectorAll('.lib-tab');
+    const libItems = document.querySelectorAll('[data-type]');
+
+    libTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const filter = tab.dataset.filter;
+
+        libTabs.forEach(t => {
+          t.classList.remove('active', 'bg-primary', 'text-white');
+          t.classList.add('bg-white', 'text-primary-dark');
+        });
+        tab.classList.add('active', 'bg-primary', 'text-white');
+        tab.classList.remove('bg-white', 'text-primary-dark');
+
+        libItems.forEach(item => {
+          if (filter === 'all' || item.dataset.type === filter) {
+            item.style.display = '';
+            setTimeout(() => { item.style.opacity = '1'; item.style.transform = ''; }, 10);
+          } else {
+            item.style.opacity = '0';
+            item.style.transform = 'scale(0.95)';
+            setTimeout(() => { item.style.display = 'none'; }, 200);
+          }
+        });
+      });
+    });
+
+    libItems.forEach(item => {
+      item.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+    });
+
+    // ── Newsletter ────────────────────────────────
+    function handleNewsletter(e) {
+      e.preventDefault();
+      const input = e.target.querySelector('input[type="email"]');
+      const btn = e.target.querySelector('button[type="submit"]');
+      if (!input.value) return;
+      btn.textContent = 'تم الاشتراك ✓';
+      btn.style.background = '#004d3a';
+      input.value = '';
+      setTimeout(() => {
+        btn.textContent = 'اشترك الآن';
+        btn.style.background = '';
+      }, 3000);
+    }
+
+    // ── Smooth scroll for anchor links ───────────
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', (e) => {
+        const target = document.querySelector(anchor.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          mobileMenu.classList.remove('open');
+          iconOpen.classList.remove('hidden');
+          iconClose.classList.add('hidden');
+        }
+      });
+    });
+
+    // ── Active nav link on scroll ─────────────────
+    const sections = document.querySelectorAll('section[id], header');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + entry.target.id ||
+              (entry.target.id === 'hero' && link.getAttribute('href') === '#')) {
+              link.classList.add('active');
+            }
+          });
+        }
+      });
+    }, { threshold: 0.3, rootMargin: '-80px 0px 0px 0px' });
+
+    document.querySelectorAll('section[id]').forEach(sec => observer.observe(sec));
+  </script>
+
+  <!-- Page Transition Script -->
+  <style>
+    body {
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+    body.page-loaded {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    body.page-fade-out {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Fade in on load
+      setTimeout(() => {
+        document.body.classList.add('page-loaded');
+      }, 50);
+
+      // Add click listener for smooth page transition
+      const transitionLinks = document.querySelectorAll('.page-transition-link');
+      transitionLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          const href = link.getAttribute('href');
+          const isHome = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/');
+          
+          if (href === 'index.html' && isHome) {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            return;
+          }
+
+          if (href && href !== '#' && !href.startsWith('#')) {
+            e.preventDefault();
+            document.body.classList.remove('page-loaded');
+            document.body.classList.add('page-fade-out');
+            setTimeout(() => {
+              window.location.href = href;
+            }, 400);
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
